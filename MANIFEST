@@ -1,0 +1,19 @@
+Build.PL
+Changes
+MANIFEST
+META.yml # Will be created by "make dist"
+Makefile.PL
+README
+lib/Variable/Strongly/Typed.pm
+lib/Variable/Strongly/Typed/Scalar.pm
+lib/Variable/Strongly/Typed/Array.pm
+lib/Variable/Strongly/Typed/Hash.pm
+lib/Variable/Strongly/Typed/Validators.pm
+t/00.load.t
+t/01.simple.type.t
+t/02.my.type.t
+t/03.array.type.t
+t/04.hash.type.t
+t/05.no.type.t
+t/pod-coverage.t
+t/pod.t
