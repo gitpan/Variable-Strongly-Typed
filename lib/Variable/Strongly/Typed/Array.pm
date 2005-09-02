@@ -119,52 +119,52 @@ This document describes Variable::Strongly::Typed::Array version 1.0.0
 
 =head1 SYNOPSIS
 
-    This class is utilized by Variable::Strongly::Typed - you don't
-    access this directly
+This class is utilized by Variable::Strongly::Typed - you don't
+access this directly
 
     my @array_of_ints   :TYPE('int');       # Each slot must contain an int
     my @array_of_rgb :TYPE(\&red_green_blue); # my enumerated type
-
+    
     # ... and later ...
-
+    
     $array_of_ints[23] = 44;    # Groovy
     $array_of_ints[12] = 'yah'; # croak!
-
+    
     # Return 1 if this val is RED, BLUE, or GREEN
     #   0 otherwise
     sub red_green_blue {
         local $_ = shift;
-
+    
         /\A RED \z/xms || /\A BLUE \z/xms || /\A GREEN \z/xms;
     }
-
+    
     $array_of_my_very_own_types[23] = 99;       # croak!
     $array_of_my_very_own_types[2] = 'BLUE';    # OK!
 
 =head1 DESCRIPTION
 
-    DO NOT USE THIS MODULE DIRECTLY!!
-    It's used by Variable::Strongly::Typed to do its magic.
+DO NOT USE THIS MODULE DIRECTLY!!
+It's used by Variable::Strongly::Typed to do its magic.
 
 =head1 INTERFACE 
     
-    None for you
+None for you
 
 =head1 DIAGNOSTICS
 
-    None for you
+None for you
 
 =head1 CONFIGURATION AND ENVIRONMENT
 
-    None
+None
 
 =head1 DEPENDENCIES
 
-    Variable::Strongly::Typed
+Variable::Strongly::Typed
 
 =head1 INCOMPATIBILITIES
 
-    None
+None
 
 =head1 BUGS AND LIMITATIONS
 

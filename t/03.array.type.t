@@ -12,7 +12,6 @@ my @array_of_files :TYPE('IO::File');
 eval {
 $array_of_ints[0] = 'sdklsdkl';
 };
-diag($@);
 ok($@, "Can't assign string to int!");
 
 $array_of_ints[23] = 2345;
@@ -21,14 +20,12 @@ is($array_of_ints[23], 2345);
 eval {
 push @array_of_ints, 23, 23, 'weioweio', 0;
 };
-diag($@);
 ok($@, "Can't assign string to int!");
 
 use_ok( 'IO::File' );
 eval {
     unshift @array_of_files, 23, 23, 'weioweio', 0;
 };
-diag($@);
 ok($@, "Can't assign non-IO::Files!");
 
 unshift(@array_of_files, new IO::File);
@@ -50,6 +47,5 @@ sub add_io_file {
 eval {
     @array_of_files = add_io_file();
 };
-diag($@);
 ok($@, "Can't assign array ref to IO::File array");
 

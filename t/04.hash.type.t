@@ -12,7 +12,6 @@ my %hash_of_files :TYPE('IO::File');
 eval {
 $hash_of_ints{zot} = 'sdklsdkl';
 };
-diag($@);
 ok($@, "Can't assign string to int!");
 
 $hash_of_ints{crab} = 2345;
@@ -21,7 +20,6 @@ is($hash_of_ints{crab}, 2345);
 eval {
     %hash_of_ints = ( lame => 23, game => 'weioweio', maim => 0 );
 };
-diag($@);
 ok($@, "Can't assign string to int!");
 
 $hash_of_ints{yowza} = 9923;
@@ -31,7 +29,6 @@ use_ok( 'IO::File' );
 eval {
     @hash_of_files{'mark', 'lark', 'zark'} = (23, 23, 'weioweio');
 };
-diag($@);
 ok($@, "Can't assign non-IO::Files!");
 
 $hash_of_files{new_one} =  new IO::File;

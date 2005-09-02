@@ -19,7 +19,6 @@ my $io_file :TYPE('IO::File');  # only IO::File object
 eval {
     $int = '2sdlk';
 };
-diag($@);
 ok($@, "Cannot assign non-int to int!");
 
 $int = 23;
@@ -28,7 +27,6 @@ is(23, $int);
 eval {
     $string = {};
 };
-diag($@);
 ok($@, "Cannot assign non-string to string!");
 
 $string = 'howdy boyz';
@@ -38,7 +36,6 @@ is('howdy boyz', $string);
 eval {
     $scalar_ref = 23;
 };
-diag($@);
 ok($@, "Cannot assign non-scalar-ref to scalar ref!");
 
 $scalar_ref = \44; 
@@ -47,7 +44,6 @@ is(44, $$scalar_ref);
 eval {
     $array_ref = 44;
 };
-diag($@);
 ok($@, "Cannot assign non-array-ref to array ref!");
 
 $array_ref = [];
@@ -56,7 +52,6 @@ is('ARRAY', ref $array_ref);
 eval {
     $hash_ref = 23;
 };
-diag($@);
 ok($@, "Cannot assign non-hash-ref to hash ref!");
 
 $hash_ref = { howdy => 'partner' };
@@ -66,7 +61,6 @@ use_ok( 'IO::File');
 eval {
     $io_file = 23;
 };
-diag($@);
 ok($@, "Cannot assign non-File::Find-ref to File::Find!");
 
 $io_file = new IO::File;
@@ -75,7 +69,6 @@ ok('IO::File', ref $io_file);
 eval {
     $float = "this ain't no float";
 };
-diag($@);
 ok($@, "Can't assign string to float!");
 
 $pi = 3.14159;
@@ -90,6 +83,5 @@ is($bool, 1);
 eval {
     $bool = 'what is this?';
 };
-diag($@);
 ok($@, "String not a boolean value");
 

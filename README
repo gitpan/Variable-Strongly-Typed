@@ -1,4 +1,4 @@
-Variable-Strongly-Typed version 1.0.0
+Variable-Strongly-Typed version 1.1.0
 
     This modules allow you to strongly type your variables.  Also known
     as the 'no fun' module - it can greatly enhance you code's quality
@@ -19,7 +19,16 @@ Variable-Strongly-Typed version 1.0.0
     my @array_of_ints   :TYPE('int');       # Each slot must contain an int
     my %hash_of_floats  :TYPE('float');     # Each value must be a float
 
+    my $int_own_error   :TYPE('int', \&my_own_error_handler);
+                                            # Roll my own error handler
+
     my @array_of_rgb :TYPE(\&red_green_blue); # my enumerated type
+
+    # For subs!!
+     sub return_an_int :TYPE('int') {
+        # .. do some stuff ..
+        return $something;
+     }
 
     # ... and later ...
 
@@ -46,6 +55,13 @@ Variable-Strongly-Typed version 1.0.0
     $array_of_my_very_own_types[23] = 99;       # croak!
     $array_of_my_very_own_types[2] = 'BLUE';    # OK!
 
+    $int_own_error = 'lksdklwe';    # The sub 'my_own_error_hanlder'
+                                    #   will be #   called with the
+                                    #   offending value
+
+    my $got_it = return_an_int();   # Will 'croak' (or call your error
+                                    #   function) #   if this sub doesn't
+                                    #   return an 'int'
 
 INSTALLATION
 

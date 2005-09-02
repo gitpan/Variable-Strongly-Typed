@@ -11,7 +11,6 @@ my $zany :TYPE('zany');
 eval {
     $zany = 'der heck?';
 };
-diag($@);
 ok($@, "It's not a zany!");
 
 $zany = bless \my($anon_scalar), 'zany';

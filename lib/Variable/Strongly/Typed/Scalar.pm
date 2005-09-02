@@ -48,33 +48,33 @@ This document describes Variable::Strongly::Typed::Scalar version 1.0.0
 
 =head1 SYNOPSIS
 
-    This class is utilized by Variable::Strongly::Typed - you don't
-    access this directly
+This class is utilized by Variable::Strongly::Typed - you don't
+access this directly
 
  =head1 DESCRIPTION
 
-    DO NOT USE THIS MODULE DIRECTLY!!
-    It's used by Variable::Strongly::Typed to do its magic.
+DO NOT USE THIS MODULE DIRECTLY!!
+It's used by Variable::Strongly::Typed to do its magic.
 
 =head1 INTERFACE 
     
-    None for you
+None for you
 
 =head1 DIAGNOSTICS
 
-    None for you
+None for you
 
 =head1 CONFIGURATION AND ENVIRONMENT
 
-    None
+None
 
 =head1 DEPENDENCIES
 
-    Variable::Strongly::Typed
+Variable::Strongly::Typed
 
 =head1 INCOMPATIBILITIES
 
-    None
+None
 
 =head1 BUGS AND LIMITATIONS
 

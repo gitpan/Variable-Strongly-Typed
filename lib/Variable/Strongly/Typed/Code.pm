@@ -1,4 +1,4 @@
-package Variable::Strongly::Typed::Validators;
+package Variable::Strongly::Typed::Code;
 
 use version; $VERSION = qv('1.0.0');
 
@@ -6,15 +6,57 @@ use warnings;
 use strict;
 use Carp;
 
-our %conditions;
+use base qw(Variable::Strongly::Typed);
 
-#
-# Basic variable types
-#
-$conditions{int}    = '/\A \d+ \z/xms';
-$conditions{string} = '!ref';
-$conditions{float}  =  '/( [-+]? (?:\d+\.?\d*|\.\d+) (?:[eE]\d+)? )/xms';
-$conditions{bool}   =  $conditions{int};  # 0 already accounted for
+{
+    sub new {
+        my($class, $symbol, $referent, $type) = @_;
+
+        my $self = bless \my($anon_scalar), $class;
+
+        my $full_sub_name = $$symbol;
+        $full_sub_name =~ s/^\*//;
+        my $sub_ref = do { no strict 'refs'; *{$full_sub_name}{CODE} };
+
+        $self->_init($sub_ref, $type);
+
+        my $checked_sub = $self->_make_checker_for;
+
+        # Install it
+        {
+            no strict 'refs';
+            no warnings 'redefine';
+            *{$full_sub_name} = $checked_sub;
+        }
+
+        return;
+    }
+
+    sub _make_checker_for {
+        my($self) = @_;
+
+        my $valid_type = $self->_get_type;
+        my $original_sub = $self->_get_object;
+
+        return sub {
+            # Call $original_sub correctly
+
+            if (!defined wantarray) {
+                $self->_error("Throwing away return value of $valid_type");
+            }
+
+            if (wantarray) {
+                my @ret = $original_sub->(@_);
+                $self->_check_values(@ret);
+                return @ret;
+            } else {
+                my $ret = $original_sub->(@_);
+                $self->_check_values($ret);
+                return $ret;
+            }
+        }
+    }
+}
 
 1;
 
@@ -22,24 +64,20 @@ __END__
 
 =head1 NAME
 
-Variable::Strongly::Typed::Validators - Built-in type validators
+Variable::Strongly::Typed::Code - Strongly typed function
 
 
 =head1 VERSION
 
-This document describes Variable::Strongly::Typed::Validators version 1.0.0
+This document describes Variable::Strongly::Typed::Code version 1.0.0
 
 
 =head1 SYNOPSIS
 
 This class is utilized by Variable::Strongly::Typed - you don't
-access this directly.
-This module defines a '%conditions' hash contained expressions 
-that define the built-in types.
-If you want to create a new type just pass a CODE ref in your TYPE()
-attribute rather than modifying this hash.
+access this directly
 
- =head1 DESCRIPTION
+=head1 DESCRIPTION
 
 DO NOT USE THIS MODULE DIRECTLY!!
 It's used by Variable::Strongly::Typed to do its magic.
